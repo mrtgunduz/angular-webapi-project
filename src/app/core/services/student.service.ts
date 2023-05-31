@@ -4,15 +4,14 @@ import { Observable } from 'rxjs';
 import { Student } from '../apimodels/student';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentService {
+  constructor(private httpClient: HttpClient) {}
 
-constructor(private httpClient:HttpClient) { }
+  baseApiUrl = 'https://localhost:7221';
 
-baseApiUrl = 'https://localhost:7221';
-
-getStudent():Observable<Student[]>{
-return this.httpClient.get<Student[]>(this.baseApiUrl+'/Students');
-}
+  getStudent(): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(this.baseApiUrl + '/Students');
+  }
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StudentService } from '../core/services/student.service';
 import { Student } from '../core/apimodels/student';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-students',
@@ -9,17 +11,18 @@ import { Student } from '../core/apimodels/student';
 })
 export class StudentsComponent implements OnInit {
   constructor(private _studentService: StudentService) {}
-  students!:Student[];
+  displayedColumns: string[] = ['firstName', 'lastName', 'dateOfBirth','email','mobile','gender'];
+  dataSource:MatTableDataSource<Student> = new MatTableDataSource<Student>();
+  students: Student[] = [];
+  @ViewChild(MatPaginator) paginator! : MatPaginator
 
   ngOnInit(): void {
-    debugger;
     this._studentService.getStudent().subscribe(
-      (success) => {
-        this.students = success;
-        console.log(success);
-      },
-    );
+      (res) => {
+        this.students = res;
+        this.dataSource =new MatTableDataSource<Student>(this.students);
+        this.dataSource.paginator = this.paginator;
+      }
+    )
   }
-
-  getStudents() {}
 }
