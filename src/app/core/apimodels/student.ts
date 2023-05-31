@@ -1,10 +1,15 @@
+import { Adress } from "./address";
+import { Gender } from "./gender";
+
 export interface Student {
-Id:number,
-FirstName:string,
-LastName:string,
-DateOfBirth:Date,
-Email:string,
-Mobile:string,
-ProfileImageUrl:string,
-GenderId:number;
+id:number,
+firstName:string,
+lastName:string,
+dateOfBirth:Date,
+email:string,
+mobile:string,
+profileImageUrl:string,
+genderId:number;
+gender:Gender
+address:Adress
 }

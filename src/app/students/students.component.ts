@@ -9,13 +9,13 @@ import { Student } from '../core/apimodels/student';
 })
 export class StudentsComponent implements OnInit {
   constructor(private _studentService: StudentService) {}
-  student!:Student[];
+  students!:Student[];
 
   ngOnInit(): void {
     debugger;
     this._studentService.getStudent().subscribe(
       (success) => {
-        this.student = success;
+        this.students = success;
         console.log(success);
       },
     );

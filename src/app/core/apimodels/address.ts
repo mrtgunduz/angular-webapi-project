@@ -1,5 +1,5 @@
 export interface Adress {
-  Id:number,
-  PhysicalAdress:string,
-  PostalAdress:string,
+  id:number,
+  physicalAdress:string,
+  postalAdress:string,
 }
