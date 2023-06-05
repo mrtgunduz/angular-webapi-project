@@ -19,6 +19,7 @@ export class StudentsComponent implements OnInit {
     'email',
     'mobile',
     'gender',
+    'edit',
   ];
   dataSource: MatTableDataSource<Student> = new MatTableDataSource<Student>();
   students: Student[] = [];
@@ -27,7 +28,7 @@ export class StudentsComponent implements OnInit {
   filterString = '';
 
   ngOnInit(): void {
-    this._studentService.getStudent().subscribe((res) => {
+    this._studentService.getStudents().subscribe((res) => {
       this.students = res;
       this.dataSource = new MatTableDataSource<Student>(this.students);
       this.dataSource.paginator = this.paginator;
