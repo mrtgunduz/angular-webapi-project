@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
-import { Student } from '../apimodels/student';
+import { Student } from '../models/student.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +11,10 @@ export class StudentService {
 
   baseApiUrl = 'https://localhost:7221';
 
-  getStudents(): Observable<Student[]> {
+  getStudents() {
     return this.httpClient.get<Student[]>(this.baseApiUrl + '/Students');
   }
+
 
   getStudent(studentId: String | null) {
     return this.httpClient.get<Student>(this.baseApiUrl + '/students/' + studentId);

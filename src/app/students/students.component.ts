@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { StudentService } from '../core/services/student.service';
-import { Student } from '../core/apimodels/student';
+import { Student } from '../core/models/student.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -28,8 +28,10 @@ export class StudentsComponent implements OnInit {
   filterString = '';
 
   ngOnInit(): void {
+
     this._studentService.getStudents().subscribe((res) => {
       this.students = res;
+      console.log(res);
       this.dataSource = new MatTableDataSource<Student>(this.students);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
