@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
-import { Student } from '../models/student.model';
+import { StudentTypes } from '../models/student.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +10,14 @@ import { Student } from '../models/student.model';
 export class StudentService {
   constructor(private httpClient: HttpClient) {}
 
-  baseApiUrl = 'https://localhost:7221';
+baseApiUrl: string = 'https://localhost:7221'
 
-  getStudents() {
-    return this.httpClient.get<Student[]>(this.baseApiUrl + '/Students');
+  getStudents(): Observable<StudentTypes[]>{
+    return this.httpClient.get<StudentTypes[]>(this.baseApiUrl + '/Students');
   }
 
 
-  getStudent(studentId: String | null) {
-    return this.httpClient.get<Student>(this.baseApiUrl + '/students/' + studentId);
+  getStudent(studentTypesId: String | null):Observable<StudentTypes> {
+    return this.httpClient.get<StudentTypes>(this.baseApiUrl + '/students/' + studentTypesId);
   }
 }
