@@ -1,25 +1,24 @@
-export class Student {
-  id?: number;
-  firstName?: string;
-  lastName?: string;
-  dateOfBirth?: Date;
-  email?: string;
-  mobile?: string;
-  profileImageUrl?: string;
-  genderId?: number;
-  gender?: Gender[];
-  address?: Adress[];
+export interface StudentTypes {
+  id: string
+  firstName: string
+  lastName: string
+  dateOfBirth: any
+  email: string
+  mobile: number
+  profileImageUrl: string
+  genderId: string
+  gender: Gender
+  address:  Address
 }
 
-export class Gender {
-  id?: number;
-  name?: string;
+export interface Gender {
+  id: string
+  description: string
 }
 
-export class Adress {
-  id?: number;
-  street?: string;
-  city?: string;
-  state?: string;
-  country?: string;
+export interface Address {
+  id: string,
+  physicalAddress: string,
+  postalAddress: string
+  studentId: any
 }
