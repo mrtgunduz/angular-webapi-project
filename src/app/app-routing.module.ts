@@ -5,18 +5,17 @@ import { TopNavComponent } from './layout/top-nav/top-nav.component';
 import { ViewStudentComponent } from './students/view-student/view-student.component';
 
 const routes: Routes = [
-  {
-    path:'', component:StudentsComponent
-  },
-  {
-    path:'students/:id', component:ViewStudentComponent
-  },
+  { path: 'students', component: StudentsComponent },
+  { path: '', redirectTo: '/students', pathMatch: 'full' },
 
-
+  {
+    path: 'students/:id',
+    component: ViewStudentComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
