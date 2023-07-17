@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
 import { StudentTypes } from '../models/student.model';
-import { environment } from 'src/environments/environment';
+import { UpdateStudentRequest } from '../models/updatestudent-model';
+
 
 @Injectable({
   providedIn: 'root',
@@ -20,4 +21,20 @@ baseApiUrl: string = 'https://localhost:7221'
   getStudent(studentTypesId: String | null):Observable<StudentTypes> {
     return this.httpClient.get<StudentTypes>(this.baseApiUrl + '/students/' + studentTypesId);
   }
+
+getStudentUpdate(studentTypesId: String | null | undefined,studentRequest:StudentTypes){
+  const updateStudentRequest : UpdateStudentRequest = {
+    firstName: studentRequest.firstName,
+    lastName: studentRequest.lastName,
+    dateOfBirth: studentRequest.dateOfBirth,
+    email: studentRequest.email,
+    mobile: studentRequest.mobile,
+    genderId: studentRequest.genderId,
+    physicalAdress: studentRequest.address.physicalAddress,
+    postalAdress: studentRequest.address.postalAddress
+
+  }
+  return this.httpClient.put<StudentTypes>(this.baseApiUrl + '/students/' + studentTypesId , studentRequest);
+}
+
 }

@@ -5,7 +5,7 @@ import { TopNavComponent } from './layout/top-nav/top-nav.component';
 import { ViewStudentComponent } from './students/view-student/view-student.component';
 
 const routes: Routes = [
-  { path: 'students', component: StudentsComponent },
+  { path: 'students', component: StudentsComponent},
   { path: '', redirectTo: '/students', pathMatch: 'full' },
 
   {

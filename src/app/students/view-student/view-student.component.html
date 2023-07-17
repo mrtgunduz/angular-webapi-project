@@ -5,8 +5,8 @@
 </div>
 
 <div class="container">
-  <div class="row p-1">
-    <div class="col-xs-12 row end-xs">
+  <div class="row p-3">
+    <div class="col-xs-12 offset-md-10 ">
       <a [routerLink]="['/students']" mat-raised-button>
         <mat-icon>chevron_left</mat-icon>
         Geri Dön
@@ -85,6 +85,11 @@
               <mat-label>Posta Kodu</mat-label>
               <textarea matInput [(ngModel)]="student.address.postalAddress" name="student.postalAddress"></textarea>
             </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button (click)="updateStudent()" mat-raised-button>Kaydet</button>
           </div>
         </div>
       </form>

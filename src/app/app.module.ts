@@ -44,6 +44,8 @@ import { StudentsComponent } from './students/students.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ViewStudentComponent } from './students/view-student/view-student.component';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -93,7 +95,11 @@ import { ViewStudentComponent } from './students/view-student/view-student.compo
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    ToastrModule.forRoot({
+      positionClass :'toast-bottom-right'
+    })
+
   ],
   schemas :[
     CUSTOM_ELEMENTS_SCHEMA

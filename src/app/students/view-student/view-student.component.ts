@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { catchError, map, throwError } from 'rxjs';
 import { Gender, StudentTypes } from 'src/app/core/models/student.model';
 import { GenderService } from 'src/app/core/services/gender-service';
 import { StudentService } from 'src/app/core/services/student.service';
@@ -36,7 +38,8 @@ export class ViewStudentComponent {
   constructor(
     private studentService: StudentService,
     private route: ActivatedRoute,
-    private genderService: GenderService
+    private genderService: GenderService,
+    private toastr:ToastrService
   ) {}
 
   ngOnInit() {
@@ -61,5 +64,17 @@ export class ViewStudentComponent {
     this.genderService.getGendersList().subscribe((data) => {
       this.genderList = data;
     })
+  }
+
+  updateStudent(){
+   this.studentService.getStudentUpdate(this.studentTypesId,this.student)
+  .subscribe((data) => {
+    if(data !== null) {
+    this.toastr.success('Student Updated Successfully');
+    }
+    this.student = data;
+    console.log(data);
+
+   })
   }
 }
