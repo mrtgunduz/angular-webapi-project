@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, map, throwError } from 'rxjs';
 import { Gender, StudentTypes } from 'src/app/core/models/student.model';
@@ -13,8 +13,8 @@ import { StudentService } from 'src/app/core/services/student.service';
   styleUrls: ['./view-student.component.scss'],
 })
 export class ViewStudentComponent {
-  studentTypesId?: string | null;
-  genderList: Gender[] = []
+  studentTypesId?: string | null | undefined;
+  genderList: Gender[] = [];
   student: StudentTypes = {
     id: '',
     firstName: '',
@@ -39,7 +39,8 @@ export class ViewStudentComponent {
     private studentService: StudentService,
     private route: ActivatedRoute,
     private genderService: GenderService,
-    private toastr:ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -51,30 +52,43 @@ export class ViewStudentComponent {
     this.route.paramMap.subscribe((params) => {
       debugger;
       this.studentTypesId = params.get('id');
-      this.studentService
-        .getStudent(this.studentTypesId)
-        .subscribe((data) => {
-          this.student = data;
-
-        });
+      this.studentService.getStudent(this.studentTypesId).subscribe((data) => {
+        this.student = data;
+      });
     });
   }
 
-  getGenderDetails(){
+  getGenderDetails() {
     this.genderService.getGendersList().subscribe((data) => {
       this.genderList = data;
-    })
+    });
   }
 
-  updateStudent(){
-   this.studentService.getStudentUpdate(this.studentTypesId,this.student)
-  .subscribe((data) => {
-    if(data !== null) {
-    this.toastr.success('Student Updated Successfully');
-    }
-    this.student = data;
-    console.log(data);
+  updateStudent() {
+    this.studentService
+      .getStudentUpdate(this.studentTypesId, this.student)
+      .subscribe((data) => {
+        if (data !== null) {
+          this.toastr.success('Student Updated Successfully');
+          setTimeout(() => {
+            this.router.navigateByUrl('students');
+          }, 350);
+        }
+        this.student = data;
+        console.log(data);
+      });
+  }
 
-   })
+  deleteStudent(){
+    this.studentService.deleteStudent(this.studentTypesId).subscribe((data) => {
+   this.student = data;
+   if (data !== null) {
+    this.toastr.error('Student Deleted Successfully');
+    setTimeout(() => {
+      this.router.navigateByUrl('students');
+    }, 350);
+  }
+
+    })
   }
 }

@@ -88,10 +88,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12">
-            <button (click)="updateStudent()" mat-raised-button>Kaydet</button>
+          <div class="col-xs-6">
+            <button (click)="updateStudent()" mat-raised-button color="primary">Kaydet</button>
+          </div>
+          <div class="col-xs-6 d-flex justify-content-end">
+            <button (click)="deleteStudent()" mat-raised-button color="warn">Sil</button>
           </div>
         </div>
+
       </form>
     </div>
     <div class="col-xs-6">Profil Gelecek</div>

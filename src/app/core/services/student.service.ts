@@ -34,7 +34,11 @@ getStudentUpdate(studentTypesId: String | null | undefined,studentRequest:Studen
     postalAdress: studentRequest.address.postalAddress
 
   }
-  return this.httpClient.put<StudentTypes>(this.baseApiUrl + '/students/' + studentTypesId , studentRequest);
+  return this.httpClient.put<StudentTypes>(this.baseApiUrl + '/students/' + studentTypesId , updateStudentRequest);
+}
+
+deleteStudent(studentTypesId:string | null | undefined):Observable<StudentTypes> {
+return this.httpClient.delete<StudentTypes>(this.baseApiUrl + '/students/' + studentTypesId);
 }
 
 }
