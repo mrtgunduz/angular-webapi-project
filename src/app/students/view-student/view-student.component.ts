@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, map, throwError } from 'rxjs';
+import { AddStudentRequest } from 'src/app/core/models/addstudent-model';
 import { Gender, StudentTypes } from 'src/app/core/models/student.model';
 import { GenderService } from 'src/app/core/services/gender-service';
 import { StudentService } from 'src/app/core/services/student.service';
@@ -13,6 +14,12 @@ import { StudentService } from 'src/app/core/services/student.service';
   styleUrls: ['./view-student.component.scss'],
 })
 export class ViewStudentComponent {
+
+
+
+
+
+  students: StudentTypes[] = [];
   studentTypesId?: string | null | undefined;
   genderList: Gender[] = [];
   student: StudentTypes = {
@@ -35,6 +42,7 @@ export class ViewStudentComponent {
       studentId: '',
     },
   };
+  isNeWStudent: boolean =  false;
   constructor(
     private studentService: StudentService,
     private route: ActivatedRoute,
@@ -50,8 +58,15 @@ export class ViewStudentComponent {
 
   getStudentDetails() {
     this.route.paramMap.subscribe((params) => {
-      debugger;
+
       this.studentTypesId = params.get('id');
+      //studenttypesıd add ise
+       if(this.studentTypesId === "add") {
+       this.isNeWStudent = true;
+       } else {
+        this.isNeWStudent = false;
+       }
+
       this.studentService.getStudent(this.studentTypesId).subscribe((data) => {
         this.student = data;
       });
@@ -80,6 +95,7 @@ export class ViewStudentComponent {
   }
 
   deleteStudent(){
+    debugger;
     this.studentService.deleteStudent(this.studentTypesId).subscribe((data) => {
    this.student = data;
    if (data !== null) {
@@ -90,5 +106,14 @@ export class ViewStudentComponent {
   }
 
     })
+  }
+
+
+
+  addStudent(){
+    this.studentService.addStudent(this.studentTypesId,this.student).subscribe((res) => {
+      debugger;
+this.student = res;
+    });
   }
 }

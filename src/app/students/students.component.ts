@@ -4,6 +4,7 @@ import { StudentTypes } from '../core/models/student.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { AddStudentRequest } from '../core/models/addstudent-model';
 
 @Component({
   selector: 'app-students',
@@ -11,7 +12,8 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./students.component.css'],
 })
 export class StudentsComponent implements OnInit {
-  constructor(private _studentService: StudentService) {}
+  constructor(private _studentService: StudentService) {
+  }
   displayedColumns: string[] = [
     'firstName',
     'lastName',
@@ -21,6 +23,8 @@ export class StudentsComponent implements OnInit {
     'gender',
     'edit',
   ];
+  studentTypesId?: string | null | undefined;
+
   dataSource: MatTableDataSource<StudentTypes> = new MatTableDataSource<StudentTypes>();
   students: StudentTypes[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -43,4 +47,6 @@ export class StudentsComponent implements OnInit {
    this.dataSource.filter = this.filterString.trim().toLocaleLowerCase();
 
   }
+
+
 }

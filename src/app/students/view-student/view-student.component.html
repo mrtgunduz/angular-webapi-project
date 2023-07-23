@@ -1,6 +1,7 @@
 <div class="page-header">
   <div class="container">
-    <h1 class="">Öğrenci Görüntüle</h1>
+    <h1 *ngIf="!isNeWStudent" class="">Öğrenci Görüntüle</h1>
+    <h1 *ngIf="isNeWStudent" class="">Öğrenci Ekle</h1>
   </div>
 </div>
 
@@ -87,12 +88,17 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="row">
+        <div *ngIf="!isNeWStudent" class="row">
           <div class="col-xs-6">
             <button (click)="updateStudent()" mat-raised-button color="primary">Kaydet</button>
           </div>
-          <div class="col-xs-6 d-flex justify-content-end">
+          <div  class="col-xs-6 d-flex justify-content-end">
             <button (click)="deleteStudent()" mat-raised-button color="warn">Sil</button>
+          </div>
+        </div>
+        <div *ngIf="isNeWStudent" class="row">
+          <div class="col-xs-12">
+            <button (click)="addStudent()" mat-raised-button color="primary">Ekle</button>
           </div>
         </div>
 
