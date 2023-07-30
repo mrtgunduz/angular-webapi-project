@@ -7,7 +7,7 @@
 
 <div class="container">
   <div class="row p-3">
-    <div class="col-xs-12 offset-md-10 ">
+    <div class="col-xs-12 offset-md-10">
       <a [routerLink]="['/students']" mat-raised-button>
         <mat-icon>chevron_left</mat-icon>
         Geri Dön
@@ -21,13 +21,21 @@
           <div class="col-xs-6">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Ad</mat-label>
-              <input matInput  [(ngModel)]="student.firstName" name="student.firstName"/>
+              <input
+                matInput
+                [(ngModel)]="student.firstName"
+                name="student.firstName"
+              />
             </mat-form-field>
           </div>
           <div class="col-xs-6">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Soyad</mat-label>
-              <input matInput [(ngModel)]="student.lastName" name="student.lastName"/>
+              <input
+                matInput
+                [(ngModel)]="student.lastName"
+                name="student.lastName"
+              />
             </mat-form-field>
           </div>
         </div>
@@ -35,7 +43,12 @@
           <div class="col-xs-12">
             <mat-form-field appearance="outline">
               <mat-label>Doğum Tarihi</mat-label>
-              <input matInput [matDatepicker]="picker" [(ngModel)]="student.dateOfBirth" name="student.dateOfBirth" />
+              <input
+                matInput
+                [matDatepicker]="picker"
+                [(ngModel)]="student.dateOfBirth"
+                name="student.dateOfBirth"
+              />
               <mat-datepicker-toggle
                 matIconSuffix
                 [for]="picker"
@@ -49,13 +62,21 @@
           <div class="col-xs-6">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>E-mail</mat-label>
-              <input matInput [(ngModel)]="student.email" name="student.email"/>
+              <input
+                matInput
+                [(ngModel)]="student.email"
+                name="student.email"
+              />
             </mat-form-field>
           </div>
           <div class="col-xs-6">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Telefon</mat-label>
-              <input matInput [(ngModel)]="student.mobile" name="student.mobile"/>
+              <input
+                matInput
+                [(ngModel)]="student.mobile"
+                name="student.mobile"
+              />
             </mat-form-field>
           </div>
         </div>
@@ -64,9 +85,15 @@
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Cinsiyet</mat-label>
 
-              <mat-select [(ngModel)]="student.genderId" name="student.genderId">
-                <mat-option *ngFor="let gender of genderList" [value]="gender.id">
-                  {{gender.description}}
+              <mat-select
+                [(ngModel)]="student.genderId"
+                name="student.genderId"
+              >
+                <mat-option
+                  *ngFor="let gender of genderList"
+                  [value]="gender.id"
+                >
+                  {{ gender.description }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -76,7 +103,11 @@
           <div class="col-xs-12">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Adres</mat-label>
-              <textarea matInput [(ngModel)]="student.address.physicalAddress" name="student.address.physicalAddress"></textarea>
+              <textarea
+                matInput
+                [(ngModel)]="student.address.physicalAddress"
+                name="student.address.physicalAddress"
+              ></textarea>
             </mat-form-field>
           </div>
         </div>
@@ -84,26 +115,49 @@
           <div class="col-xs-12">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Posta Kodu</mat-label>
-              <textarea matInput [(ngModel)]="student.address.postalAddress" name="student.postalAddress"></textarea>
+              <textarea
+                matInput
+                [(ngModel)]="student.address.postalAddress"
+                name="student.postalAddress"
+              ></textarea>
             </mat-form-field>
           </div>
         </div>
         <div *ngIf="!isNeWStudent" class="row">
           <div class="col-xs-6">
-            <button (click)="updateStudent()" mat-raised-button color="primary">Kaydet</button>
+            <button (click)="updateStudent()" mat-raised-button color="primary">
+              Kaydet
+            </button>
           </div>
-          <div  class="col-xs-6 d-flex justify-content-end">
-            <button (click)="deleteStudent()" mat-raised-button color="warn">Sil</button>
+          <div class="col-xs-6 d-flex justify-content-end">
+            <button (click)="deleteStudent()" mat-raised-button color="warn">
+              Sil
+            </button>
           </div>
         </div>
         <div *ngIf="isNeWStudent" class="row">
           <div class="col-xs-12">
-            <button (click)="addStudent()" mat-raised-button color="primary">Ekle</button>
+            <button (click)="addStudent()" mat-raised-button color="primary">
+              Ekle
+            </button>
           </div>
         </div>
-
       </form>
     </div>
-    <div class="col-xs-6">Profil Gelecek</div>
+    <div class="col-xs-6">
+      <div class="row center-xs mt-1">
+        <div class="image-container">
+          <img [src]="displayProfileImageUrl">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 center-xs mt-1">
+          <input hidden type="file" #imageUpload (change)="uploadImage($event)">
+          <button (click)="imageUpload.click()" mat-raised-button color="primary">
+            Resmi Düzenle
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

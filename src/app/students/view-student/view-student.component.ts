@@ -18,7 +18,6 @@ export class ViewStudentComponent {
 
 
 
-
   students: StudentTypes[] = [];
   studentTypesId?: string | null | undefined;
   genderList: Gender[] = [];
@@ -43,6 +42,8 @@ export class ViewStudentComponent {
     },
   };
   isNeWStudent: boolean =  false;
+  displayProfileImageUrl= '';
+
   constructor(
     private studentService: StudentService,
     private route: ActivatedRoute,
@@ -63,13 +64,16 @@ export class ViewStudentComponent {
       //studenttypesıd add ise
        if(this.studentTypesId === "add") {
        this.isNeWStudent = true;
+       this.setImage();
        } else {
         this.isNeWStudent = false;
+        this.studentService.getStudent(this.studentTypesId).subscribe((data) => {
+          this.student = data;
+          this.setImage();
+        });
        }
 
-      this.studentService.getStudent(this.studentTypesId).subscribe((data) => {
-        this.student = data;
-      });
+
     });
   }
 
@@ -115,5 +119,28 @@ export class ViewStudentComponent {
       debugger;
 this.student = res;
     });
+  }
+
+  setImage()
+  {
+  if(this.student.profileImageUrl)
+  {
+   this.displayProfileImageUrl =  this.studentService.getImagePath(this.student.profileImageUrl);
+   console.log(this.displayProfileImageUrl)
+  } else {
+    this.displayProfileImageUrl = '/assets/user.png';
+  }
+  }
+
+  uploadImage($event:any){
+    debugger;
+   if(this.studentTypesId)
+   {
+    let file : File = $event.target.files[0];
+    this.studentService.uploadImage(this.studentTypesId,file).subscribe((res) => {
+      this.student.profileImageUrl = res;
+      this.setImage();
+    })
+   }
   }
 }

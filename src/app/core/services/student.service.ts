@@ -58,4 +58,19 @@ addStudent(studentTypesId: String | null | undefined,studentRequest:StudentTypes
   return this.httpClient.post<StudentTypes>(this.baseApiUrl + '/students/' + studentTypesId , addStudentRequest);
 }
 
+getImagePath(relativePath:string){
+  return `${this.baseApiUrl}/${relativePath}`;
+}
+
+
+uploadImage(studentTypesId: String | null | undefined,file:File):Observable<any>
+{
+
+  let formData:FormData = new FormData();
+  formData.append('profileImage',file)
+  return this.httpClient.post<StudentTypes>(this.baseApiUrl + '/students/' + studentTypesId+ '/upload-image', formData , {responseType : 'text' as 'json'});
+}
+
+
+
 }
