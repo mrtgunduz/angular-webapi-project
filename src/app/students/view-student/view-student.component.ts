@@ -99,7 +99,7 @@ export class ViewStudentComponent {
   }
 
   deleteStudent(){
-    debugger;
+    ;
     this.studentService.deleteStudent(this.studentTypesId).subscribe((data) => {
    this.student = data;
    if (data !== null) {
@@ -116,7 +116,7 @@ export class ViewStudentComponent {
 
   addStudent(){
     this.studentService.addStudent(this.studentTypesId,this.student).subscribe((res) => {
-      debugger;
+      ;
 this.student = res;
     });
   }
@@ -133,7 +133,7 @@ this.student = res;
   }
 
   uploadImage($event:any){
-    debugger;
+    ;
    if(this.studentTypesId)
    {
     let file : File = $event.target.files[0];

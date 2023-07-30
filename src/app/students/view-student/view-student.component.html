@@ -150,7 +150,7 @@
           <img [src]="displayProfileImageUrl">
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="!isNeWStudent">
         <div class="col-xs-12 center-xs mt-1">
           <input hidden type="file" #imageUpload (change)="uploadImage($event)">
           <button (click)="imageUpload.click()" mat-raised-button color="primary">

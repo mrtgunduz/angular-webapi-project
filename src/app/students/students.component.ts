@@ -43,7 +43,7 @@ export class StudentsComponent implements OnInit {
   }
 
   filterStudents() {
-    debugger;
+    ;
    this.dataSource.filter = this.filterString.trim().toLocaleLowerCase();
 
   }
